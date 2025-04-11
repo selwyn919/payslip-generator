@@ -1,0 +1,3 @@
+2025-04-11 11:28:46,744 - INFO - Output directory created: C:\Users\uncommonStudent\OneDrive\Desktop\selwyn python\payslips
+2025-04-11 11:28:47,436 - ERROR - Error generating payslip: Canvas.rect() got an unexpected keyword argument 'fillColor'
+2025-04-11 11:28:47,437 - ERROR - Error processing payslips: Canvas.rect() got an unexpected keyword argument 'fillColor'
