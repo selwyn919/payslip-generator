@@ -743,8 +743,8 @@ def main():
         current_month = datetime.now().strftime("%B %Y")
         
         # Email details
-        sender_email = "selwyntauzeni220@gmail.com"  # Your email address
-        sender_password = "pmqm uakw njxq bjze"  # Your app password
+        sender_email = "your_email@gmail.com"  # Your email address
+        sender_password = "app_password"  # Your app password
         
         # Generate PDF and send via email
         success_count = 0
