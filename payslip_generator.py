@@ -110,8 +110,8 @@ logo_path = os.path.join(os.path.dirname(excel_file), "company_logo.png")
 # Get current month
 current_month = datetime.now().strftime("%B %Y")
 # Email details (replace with your actual details)
-sender_email = "selwyntauzeni220@gmail.com" # Your email address
-sender_password = "pmqm uakw njxq bjze" # Your email password or app password
+sender_email = "your_email@gmail.com" # Your email address
+sender_password = "app_password" # Your email password or app password
 # Generate PDF and send via email
 for _, row in df.iterrows():
     name_safe = str(row['Name']).strip().replace(' ', '_')
