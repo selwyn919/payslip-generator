@@ -1,328 +1,328 @@
-# # import pandas as pd
-# # from fpdf import FPDF
-# # import os
-
-# # def validate_excel_path(file_path: str) -> bool:
-# #     """Validate if the Excel file exists and is accessible."""
-# #     return os.path.isfile(file_path) and os.access(file_path, os.R_OK)
-
-# # def load_employee_data(file_path: str) -> pd.DataFrame:
-# #     """Load employee data from Excel file with detailed error reporting."""
-# #     try:
-# #         df = pd.read_excel(file_path)
-        
-# #         # Print all column information for debugging
-# #         print("\n📋 Detailed Column Information:")
-# #         print("-" * 40)
-# #         print("Column Names:", df.columns.tolist())
-# #         print("Column Types:\n", df.dtypes)
-# #         print("\nSample of Data:")
-# #         print(df.head())
-        
-# #         # Clean column names
-# #         df.columns = df.columns.str.strip().str.title()
-        
-# #         # Verify required columns
-# #         required_columns = ['Name', 'EmployeeID', 'Department', 'Salary']
-# #         missing_cols = [col for col in required_columns if col not in df.columns]
-        
-# #         if missing_cols:
-# #             print("\n❌ Missing Required Columns:")
-# #             for col in missing_cols:
-# #                 print(f"- {col}")
-# #             raise ValueError("Missing required columns")
-            
-# #         return df
-        
-# #     except FileNotFoundError:
-# #         print(f"\n❌ File not found: {file_path}")
-# #         raise
-# #     except Exception as e:
-# #         print(f"\n❌ Error reading Excel file: {str(e)}")
-# #         raise
-
-# # def create_payslip(pdf: FPDF, employee_data: dict) -> None:
-# #     """Create a formatted payslip for an employee."""
-# #     pdf.add_page()
-# #     pdf.set_font("Arial", size=12)
-    
-# #     # Header
-# #     pdf.cell(200, 10, txt="Payslip", ln=True, align='C')
-# #     pdf.ln(10)
-    
-# #     # Employee details
-# #     pdf.cell(200, 10, txt=f"Name: {employee_data['Name']}", ln=True)
-# #     pdf.cell(200, 10, txt=f"Employee ID: {employee_data['EmployeeID']}", ln=True)
-# #     pdf.cell(200, 10, txt=f"Department: {employee_data['Department']}", ln=True)
-# #     pdf.cell(200, 10, txt=f"Salary: ${employee_data['Salary']:.2f}", ln=True)
-
-# # def main():
-# #     # Set the path to your Excel file
-# #     excel_file = r"C:\Users\uncommonStudent\OneDrive\Desktop\selwyn python\employees.xlsx"
-    
-# #     # Validate file existence
-# #     if not validate_excel_path(excel_file):
-# #         exit()
-    
-# #     try:
-# #         # Load employee data with detailed debugging
-# #         df = load_employee_data(excel_file)
-        
-# #         # Create output folder for payslips
-# #         output_folder = os.path.join(os.path.dirname(excel_file), "payslips")
-# #         os.makedirs(output_folder, exist_ok=True)
-        
-# #         # Generate PDF payslip for each employee
-# #         success_count = 0
-# #         total_employees = len(df)
-        
-# #         for _, row in df.iterrows():
-# #             try:
-# #                 pdf = FPDF()
-# #                 create_payslip(pdf, dict(row))
-                
-# #                 safe_name = f"{row['Name'].replace(' ', '_')}_payslip.pdf"
-# #                 filename = os.path.join(output_folder, safe_name)
-# #                 pdf.output(filename)
-# #                 success_count += 1
-                
-# #             except Exception as e:
-# #                 print(f"\n❌ Error generating payslip for {row['Name']}: {str(e)}")
-# #                 continue
-        
-# #         print(f"\n✅ Generated {success_count}/{total_employees} payslips successfully!")
-        
-# #     except Exception as e:
-# #         print(f"\n❌ Fatal error: {str(e)}")
-
-# # if __name__ == "__main__":
-# #     main()
-
 # import pandas as pd
 # from fpdf import FPDF
 # import os
 
-# # Create properly formatted DataFrame
-# data = {
-#     'EmployeeID': ['07-2348769L43', '63-6784438G48', '03-46445832M44', '44-6889759D63', '63-8897652R44'],
-#     'Name': ['TINASHE WUTETE', 'LLOYD CHOGARI', 'TAFADZWA', 'DEMINIOUS', 'CARLTON SITHOLE'],
-#     'Department': ['HR', 'IT', 'Finance', 'Marketing', 'Sales'],
-#     'Salary': [50000, 55000, 48000, 52000, 58000],
-#     'Allowances': [100, 120, 110, 100, 130],
-#     'Deductions': [25, 55, 45, 34, 34]
-# }
+# def validate_excel_path(file_path: str) -> bool:
+#     """Validate if the Excel file exists and is accessible."""
+#     return os.path.isfile(file_path) and os.access(file_path, os.R_OK)
 
-# df = pd.DataFrame(data)
+# def load_employee_data(file_path: str) -> pd.DataFrame:
+#     """Load employee data from Excel file with detailed error reporting."""
+#     try:
+#         df = pd.read_excel(file_path)
+        
+#         # Print all column information for debugging
+#         print("\n📋 Detailed Column Information:")
+#         print("-" * 40)
+#         print("Column Names:", df.columns.tolist())
+#         print("Column Types:\n", df.dtypes)
+#         print("\nSample of Data:")
+#         print(df.head())
+        
+#         # Clean column names
+#         df.columns = df.columns.str.strip().str.title()
+        
+#         # Verify required columns
+#         required_columns = ['Name', 'EmployeeID', 'Department', 'Salary']
+#         missing_cols = [col for col in required_columns if col not in df.columns]
+        
+#         if missing_cols:
+#             print("\n❌ Missing Required Columns:")
+#             for col in missing_cols:
+#                 print(f"- {col}")
+#             raise ValueError("Missing required columns")
+            
+#         return df
+        
+#     except FileNotFoundError:
+#         print(f"\n❌ File not found: {file_path}")
+#         raise
+#     except Exception as e:
+#         print(f"\n❌ Error reading Excel file: {str(e)}")
+#         raise
 
-# # Display the properly formatted DataFrame
-# print("\n✅ Properly formatted DataFrame:")
-# print(df)
-
-# # Save to Excel file
-# excel_file = r"C:\Users\uncommonStudent\OneDrive\Desktop\selwyn python\employees.xlsx"
-# df.to_excel(excel_file, index=False)
-
-# print("\n✅ Data has been saved to:", excel_file)
-# print("✅ All required columns are present:")
-# print("- EmployeeID")
-# print("- Name")
-# print("- Department")
-# print("- Salary")
-# print("- Additional columns: Allowances, Deductions")
-
-# from reportlab.lib.pagesizes import letter
-# from reportlab.pdfgen import canvas
-# from reportlab.platypus import Table, TableStyle
-# from reportlab.lib import colors
-
-# def calculate_net_salary(employee_data):
-#     """Calculate Net Salary"""
-#     basic = float(employee_data['Basic Salary'])
-#     allowance = float(employee_data['Allowance'])
-#     deduction = float(employee_data['Deduction'])
-#     return basic + allowance - deduction
-
-# def generate_payslip(employee_data, filename):
-#     """Generate a single payslip PDF"""
-#     c = canvas.Canvas(filename, pagesize=letter)
+# def create_payslip(pdf: FPDF, employee_data: dict) -> None:
+#     """Create a formatted payslip for an employee."""
+#     pdf.add_page()
+#     pdf.set_font("Arial", size=12)
     
 #     # Header
-#     c.setFont("Helvetica-Bold", 16)
-#     c.drawString(50, 750, "Employee Payslip")
+#     pdf.cell(200, 10, txt="Payslip", ln=True, align='C')
+#     pdf.ln(10)
     
 #     # Employee details
-#     c.setFont("Helvetica-Bold", 12)
-#     c.drawString(50, 720, f"Employee ID: {employee_data['Employee ID']}")
-#     c.drawString(300, 720, f"Name: {employee_data['Name']}")
+#     pdf.cell(200, 10, txt=f"Name: {employee_data['Name']}", ln=True)
+#     pdf.cell(200, 10, txt=f"Employee ID: {employee_data['EmployeeID']}", ln=True)
+#     pdf.cell(200, 10, txt=f"Department: {employee_data['Department']}", ln=True)
+#     pdf.cell(200, 10, txt=f"Salary: ${employee_data['Salary']:.2f}", ln=True)
+
+# def main():
+#     # Set the path to your Excel file
+#     excel_file = r"C:\Users\uncommonStudent\OneDrive\Desktop\selwyn python\employees.xlsx"
     
-#     # Salary breakdown
-#     salary_table = [
-#         ['Component', 'Amount'],
-#         ['Basic Salary', f"${float(employee_data['Basic Salary']):.2f}"],
-#         ['Allowance', f"${float(employee_data['Allowance']):.2f}"],
-#         ['Deduction', f"${float(employee_data['Deduction']):.2f}"],
-#         ['Net Salary', f"${float(calculate_net_salary(employee_data)):.2f}"]
-#     ]
+#     # Validate file existence
+#     if not validate_excel_path(excel_file):
+#         exit()
     
-#     c.setFont("Helvetica-Bold", 14)
-#     c.drawString(50, 680, "Salary Breakdown:")
-#     c.setFont("Helvetica", 12)
+#     try:
+#         # Load employee data with detailed debugging
+#         df = load_employee_data(excel_file)
+        
+#         # Create output folder for payslips
+#         output_folder = os.path.join(os.path.dirname(excel_file), "payslips")
+#         os.makedirs(output_folder, exist_ok=True)
+        
+#         # Generate PDF payslip for each employee
+#         success_count = 0
+#         total_employees = len(df)
+        
+#         for _, row in df.iterrows():
+#             try:
+#                 pdf = FPDF()
+#                 create_payslip(pdf, dict(row))
+                
+#                 safe_name = f"{row['Name'].replace(' ', '_')}_payslip.pdf"
+#                 filename = os.path.join(output_folder, safe_name)
+#                 pdf.output(filename)
+#                 success_count += 1
+                
+#             except Exception as e:
+#                 print(f"\n❌ Error generating payslip for {row['Name']}: {str(e)}")
+#                 continue
+        
+#         print(f"\n✅ Generated {success_count}/{total_employees} payslips successfully!")
+        
+#     except Exception as e:
+#         print(f"\n❌ Fatal error: {str(e)}")
+
+# if __name__ == "__main__":
+#     main()
+
+import pandas as pd
+from fpdf import FPDF
+import os
+
+# Create properly formatted DataFrame
+data = {
+    'EmployeeID': ['07-2348769L43', '63-6784438G48', '03-46445832M44', '44-6889759D63', '63-8897652R44'],
+    'Name': ['TINASHE WUTETE', 'LLOYD CHOGARI', 'TAFADZWA', 'DEMINIOUS', 'CARLTON SITHOLE'],
+    'Department': ['HR', 'IT', 'Finance', 'Marketing', 'Sales'],
+    'Salary': [50000, 55000, 48000, 52000, 58000],
+    'Allowances': [100, 120, 110, 100, 130],
+    'Deductions': [25, 55, 45, 34, 34]
+}
+
+df = pd.DataFrame(data)
+
+# Display the properly formatted DataFrame
+print("\n✅ Properly formatted DataFrame:")
+print(df)
+
+# Save to Excel file
+excel_file = r"C:\Users\uncommonStudent\OneDrive\Desktop\selwyn python\employees.xlsx"
+df.to_excel(excel_file, index=False)
+
+print("\n✅ Data has been saved to:", excel_file)
+print("✅ All required columns are present:")
+print("- EmployeeID")
+print("- Name")
+print("- Department")
+print("- Salary")
+print("- Additional columns: Allowances, Deductions")
+
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from reportlab.platypus import Table, TableStyle
+from reportlab.lib import colors
+
+def calculate_net_salary(employee_data):
+    """Calculate Net Salary"""
+    basic = float(employee_data['Basic Salary'])
+    allowance = float(employee_data['Allowance'])
+    deduction = float(employee_data['Deduction'])
+    return basic + allowance - deduction
+
+def generate_payslip(employee_data, filename):
+    """Generate a single payslip PDF"""
+    c = canvas.Canvas(filename, pagesize=letter)
     
-#     # Create and draw the salary table
-#     table = Table(salary_table, style=[
-#         ('GRID', (0,0), (-1,-1), 1, colors.grey),
-#         ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
-#         ('ALIGN', (1,0), (1,-1), 'RIGHT'),
-#         ('BACKGROUND', (0,0), (-1,0), colors.lightgrey),
-#         ('BOTTOMPADDING', (0,0), (-1,0), 6),
-#     ])
+    # Header
+    c.setFont("Helvetica-Bold", 16)
+    c.drawString(50, 750, "Employee Payslip")
     
-#     table.wrapOn(c, 400, 300)
-#     table.drawOn(c, 50, 580)
+    # Employee details
+    c.setFont("Helvetica-Bold", 12)
+    c.drawString(50, 720, f"Employee ID: {employee_data['Employee ID']}")
+    c.drawString(300, 720, f"Name: {employee_data['Name']}")
     
-#     c.save()
-
-#     from reportlab.lib.pagesizes import letter
-# from reportlab.pdfgen import canvas
-# from reportlab.platypus import Table, TableStyle
-# from reportlab.lib import colors
-# import pandas as pd
-# import os
-# import qrcode  # For QR code generation
-# import smtplib  # For sending emails
-# from email.mime.multipart import MIMEMultipart
-# from email.mime.base import MIMEBase
-# from email import encoders
-# from datetime import datetime
-
-# def calculate_net_salary(employee_data):
-#     """Calculate Net Salary."""
-#     basic = float(employee_data.get('Basic Salary', 0))
-#     allowance = float(employee_data.get('Allowance', 0))
-#     deduction = float(employee_data.get('Deduction', 0))
-#     return basic + allowance - deduction
-
-# def generate_payslip(employee_data, filename, logo_path=None, current_month=None):
-#     """Generate a single payslip PDF."""
-#     c = canvas.Canvas(filename, pagesize=letter)
+    # Salary breakdown
+    salary_table = [
+        ['Component', 'Amount'],
+        ['Basic Salary', f"${float(employee_data['Basic Salary']):.2f}"],
+        ['Allowance', f"${float(employee_data['Allowance']):.2f}"],
+        ['Deduction', f"${float(employee_data['Deduction']):.2f}"],
+        ['Net Salary', f"${float(calculate_net_salary(employee_data)):.2f}"]
+    ]
     
-#     # Add company logo if provided
-#     if logo_path and os.path.exists(logo_path):
-#         c.drawImage(logo_path, 50, 740, width=100, height=50)
+    c.setFont("Helvetica-Bold", 14)
+    c.drawString(50, 680, "Salary Breakdown:")
+    c.setFont("Helvetica", 12)
+    
+    # Create and draw the salary table
+    table = Table(salary_table, style=[
+        ('GRID', (0,0), (-1,-1), 1, colors.grey),
+        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+        ('ALIGN', (1,0), (1,-1), 'RIGHT'),
+        ('BACKGROUND', (0,0), (-1,0), colors.lightgrey),
+        ('BOTTOMPADDING', (0,0), (-1,0), 6),
+    ])
+    
+    table.wrapOn(c, 400, 300)
+    table.drawOn(c, 50, 580)
+    
+    c.save()
 
-#     # Header
-#     c.setFont("Helvetica-Bold", 16)
-#     c.drawString(200, 750, "Employee Payslip")
+    from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from reportlab.platypus import Table, TableStyle
+from reportlab.lib import colors
+import pandas as pd
+import os
+import qrcode  # For QR code generation
+import smtplib  # For sending emails
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
+from datetime import datetime
 
-#     # Employee details
-#     c.setFont("Helvetica-Bold", 12)
-#     c.drawString(50, 700, f"Employee ID: {employee_data.get('Employee ID', 'N/A')}")
-#     c.drawString(300, 700, f"Name: {employee_data.get('Name', 'N/A')}")
+def calculate_net_salary(employee_data):
+    """Calculate Net Salary."""
+    basic = float(employee_data.get('Basic Salary', 0))
+    allowance = float(employee_data.get('Allowance', 0))
+    deduction = float(employee_data.get('Deduction', 0))
+    return basic + allowance - deduction
 
-#     # Date (current month/year)
-#     c.setFont("Helvetica", 10)
-#     c.drawString(400, 700, f"Month: {current_month}")
+def generate_payslip(employee_data, filename, logo_path=None, current_month=None):
+    """Generate a single payslip PDF."""
+    c = canvas.Canvas(filename, pagesize=letter)
+    
+    # Add company logo if provided
+    if logo_path and os.path.exists(logo_path):
+        c.drawImage(logo_path, 50, 740, width=100, height=50)
 
-#     # Salary breakdown
-#     net_salary = calculate_net_salary(employee_data)
-#     salary_table = [
-#         ['Component', 'Amount'],
-#         ['Basic Salary', f"${float(employee_data.get('Basic Salary', 0)):.2f}"],
-#         ['Allowance', f"${float(employee_data.get('Allowance', 0)):.2f}"],
-#         ['Deduction', f"${float(employee_data.get('Deduction', 0)):.2f}"],
-#         ['Net Salary', f"${net_salary:.2f}"]
-#     ]
+    # Header
+    c.setFont("Helvetica-Bold", 16)
+    c.drawString(200, 750, "Employee Payslip")
 
-#     table = Table(salary_table, colWidths=[200, 150])
-#     table.setStyle(TableStyle([
-#         ('GRID', (0, 0), (-1, -1), 1, colors.black),
-#         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-#         ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
-#         ('ALIGN', (1, 0), (1, -1), 'RIGHT'),
-#         ('FONTSIZE', (0, 0), (-1, -1), 12),
-#         ('BOTTOMPADDING', (0, 0), (-1, 0), 6),
-#     ]))
+    # Employee details
+    c.setFont("Helvetica-Bold", 12)
+    c.drawString(50, 700, f"Employee ID: {employee_data.get('Employee ID', 'N/A')}")
+    c.drawString(300, 700, f"Name: {employee_data.get('Name', 'N/A')}")
 
-#     # Draw the table
-#     table.wrapOn(c, 400, 200)
-#     table.drawOn(c, 50, 550)
+    # Date (current month/year)
+    c.setFont("Helvetica", 10)
+    c.drawString(400, 700, f"Month: {current_month}")
 
-#     # QR Code for Employee ID
-#     qr_code = qrcode.make(employee_data.get('Employee ID', 'N/A'))
-#     qr_code_path = "qr_code.png"
-#     qr_code.save(qr_code_path)
-#     c.drawImage(qr_code_path, 450, 600, width=100, height=100)
+    # Salary breakdown
+    net_salary = calculate_net_salary(employee_data)
+    salary_table = [
+        ['Component', 'Amount'],
+        ['Basic Salary', f"${float(employee_data.get('Basic Salary', 0)):.2f}"],
+        ['Allowance', f"${float(employee_data.get('Allowance', 0)):.2f}"],
+        ['Deduction', f"${float(employee_data.get('Deduction', 0)):.2f}"],
+        ['Net Salary', f"${net_salary:.2f}"]
+    ]
 
-#     # Footer
-#     c.setFont("Helvetica-Oblique", 10)
-#     c.drawString(50, 50, "Company Name - Confidential Payslip")
-#     c.drawString(400, 50, "Generated by Payroll System")
+    table = Table(salary_table, colWidths=[200, 150])
+    table.setStyle(TableStyle([
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
+        ('ALIGN', (1, 0), (1, -1), 'RIGHT'),
+        ('FONTSIZE', (0, 0), (-1, -1), 12),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 6),
+    ]))
 
-#     c.save()
-#     os.remove(qr_code_path)  # Clean up QR code image file
+    # Draw the table
+    table.wrapOn(c, 400, 200)
+    table.drawOn(c, 50, 550)
 
-# def send_email(pdf_filename, recipient_email, sender_email, sender_password):
-#     """Send an email with the PDF attached."""
-#     msg = MIMEMultipart()
-#     msg['From'] = sender_email
-#     msg['To'] = recipient_email
-#     msg['Subject'] = 'Your Employee Payslip'
+    # QR Code for Employee ID
+    qr_code = qrcode.make(employee_data.get('Employee ID', 'N/A'))
+    qr_code_path = "qr_code.png"
+    qr_code.save(qr_code_path)
+    c.drawImage(qr_code_path, 450, 600, width=100, height=100)
 
-#     # Attach the PDF
-#     part = MIMEBase('application', 'octet-stream')
-#     with open(pdf_filename, 'rb') as file:
-#         part.set_payload(file.read())
-#     encoders.encode_base64(part)
-#     part.add_header('Content-Disposition', f'attachment; filename={os.path.basename(pdf_filename)}')
-#     msg.attach(part)
+    # Footer
+    c.setFont("Helvetica-Oblique", 10)
+    c.drawString(50, 50, "Company Name - Confidential Payslip")
+    c.drawString(400, 50, "Generated by Payroll System")
 
-#     # Send email
-#     with smtplib.SMTP('smtp.gmail.com', 587) as server:
-#         server.starttls()
-#         server.login(sender_email, sender_password)
-#         server.sendmail(sender_email, recipient_email, msg.as_string())
+    c.save()
+    os.remove(qr_code_path)  # Clean up QR code image file
 
-#     print(f"📧 Payslip sent to {recipient_email}")
+def send_email(pdf_filename, recipient_email, sender_email, sender_password):
+    """Send an email with the PDF attached."""
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = recipient_email
+    msg['Subject'] = 'Your Employee Payslip'
 
-# # Load employee data from Excel
-# excel_file = r"C:\Users\uncommonStudent\OneDrive\Desktop\selwyn python\employees.xlsx"
-# df = pd.read_excel(excel_file)
-# df.columns = df.columns.str.strip()  # Remove leading/trailing spaces
+    # Attach the PDF
+    part = MIMEBase('application', 'octet-stream')
+    with open(pdf_filename, 'rb') as file:
+        part.set_payload(file.read())
+    encoders.encode_base64(part)
+    part.add_header('Content-Disposition', f'attachment; filename={os.path.basename(pdf_filename)}')
+    msg.attach(part)
 
-# # Print out the actual column names for troubleshooting
-# print("Column names in the Excel file:", df.columns)
+    # Send email
+    with smtplib.SMTP('smtp.gmail.com', 587) as server:
+        server.starttls()
+        server.login(sender_email, sender_password)
+        server.sendmail(sender_email, recipient_email, msg.as_string())
 
-# # Validate required columns
-# required_columns = {'Employee ID', 'Name', 'Basic Salary', 'Allowance', 'Deduction'}
-# missing = required_columns - set(df.columns)
-# if missing:
-#     raise KeyError(f"Missing required columns in Excel file: {missing}")
+    print(f"📧 Payslip sent to {recipient_email}")
 
-# # Output folder for PDFs
-# output_folder = os.path.join(os.path.dirname(excel_file), "payslips")
-# os.makedirs(output_folder, exist_ok=True)
+# Load employee data from Excel
+excel_file = r"C:\Users\uncommonStudent\OneDrive\Desktop\selwyn python\employees.xlsx"
+df = pd.read_excel(excel_file)
+df.columns = df.columns.str.strip()  # Remove leading/trailing spaces
 
-# # Optional: logo
-# logo_path = os.path.join(os.path.dirname(excel_file), "company_logo.png")
+# Print out the actual column names for troubleshooting
+print("Column names in the Excel file:", df.columns)
 
-# # Get current month
-# current_month = datetime.now().strftime("%B %Y")
+# Validate required columns
+required_columns = {'Employee ID', 'Name', 'Basic Salary', 'Allowance', 'Deduction'}
+missing = required_columns - set(df.columns)
+if missing:
+    raise KeyError(f"Missing required columns in Excel file: {missing}")
 
-# # Email details
-# sender_email = "youremail@example.com"  # Your email address
-# sender_password = "yourpassword"  # Your email password or app password
-# recipient_email = "employeeemail@example.com"  # Replace with the actual employee's email or loop through employee emails
+# Output folder for PDFs
+output_folder = os.path.join(os.path.dirname(excel_file), "payslips")
+os.makedirs(output_folder, exist_ok=True)
 
-# # Generate PDF and send via email
-# for _, row in df.iterrows():
-#     name_safe = str(row['Name']).strip().replace(' ', '_')
-#     pdf_filename = os.path.join(output_folder, f"{name_safe}_payslip.pdf")
-#     generate_payslip(row, pdf_filename, logo_path=logo_path, current_month=current_month)
+# Optional: logo
+logo_path = os.path.join(os.path.dirname(excel_file), "company_logo.png")
 
-#     # Optionally send email with the payslip
-#     send_email(pdf_filename, recipient_email, sender_email, sender_password)
+# Get current month
+current_month = datetime.now().strftime("%B %Y")
 
-# print("✅ Payslips generated and sent successfully.")
+# Email details
+sender_email = "youremail@example.com"  # Your email address
+sender_password = "yourpassword"  # Your email password or app password
+recipient_email = "employeeemail@example.com"  # Replace with the actual employee's email or loop through employee emails
+
+# Generate PDF and send via email
+for _, row in df.iterrows():
+    name_safe = str(row['Name']).strip().replace(' ', '_')
+    pdf_filename = os.path.join(output_folder, f"{name_safe}_payslip.pdf")
+    generate_payslip(row, pdf_filename, logo_path=logo_path, current_month=current_month)
+
+    # Optionally send email with the payslip
+    send_email(pdf_filename, recipient_email, sender_email, sender_password)
+
+print("✅ Payslips generated and sent successfully.")
 
 def generate_payslip(employee_data, filename, logo_path=None, current_month=None):
     """Generate a decorated payslip PDF with company branding."""
