@@ -1,102 +1,102 @@
-# import pandas as pd
-# from fpdf import FPDF
-# import os
+import pandas as pd
+from fpdf import FPDF
+import os
 
-# def validate_excel_path(file_path: str) -> bool:
-#     """Validate if the Excel file exists and is accessible."""
-#     return os.path.isfile(file_path) and os.access(file_path, os.R_OK)
+def validate_excel_path(file_path: str) -> bool:
+    """Validate if the Excel file exists and is accessible."""
+    return os.path.isfile(file_path) and os.access(file_path, os.R_OK)
 
-# def load_employee_data(file_path: str) -> pd.DataFrame:
-#     """Load employee data from Excel file with detailed error reporting."""
-#     try:
-#         df = pd.read_excel(file_path)
+def load_employee_data(file_path: str) -> pd.DataFrame:
+    """Load employee data from Excel file with detailed error reporting."""
+    try:
+        df = pd.read_excel(file_path)
         
-#         # Print all column information for debugging
-#         print("\n📋 Detailed Column Information:")
-#         print("-" * 40)
-#         print("Column Names:", df.columns.tolist())
-#         print("Column Types:\n", df.dtypes)
-#         print("\nSample of Data:")
-#         print(df.head())
+        # Print all column information for debugging
+        print("\n📋 Detailed Column Information:")
+        print("-" * 40)
+        print("Column Names:", df.columns.tolist())
+        print("Column Types:\n", df.dtypes)
+        print("\nSample of Data:")
+        print(df.head())
         
-#         # Clean column names
-#         df.columns = df.columns.str.strip().str.title()
+        # Clean column names
+        df.columns = df.columns.str.strip().str.title()
         
-#         # Verify required columns
-#         required_columns = ['Name', 'EmployeeID', 'Department', 'Salary']
-#         missing_cols = [col for col in required_columns if col not in df.columns]
+        # Verify required columns
+        required_columns = ['Name', 'EmployeeID', 'Department', 'Salary']
+        missing_cols = [col for col in required_columns if col not in df.columns]
         
-#         if missing_cols:
-#             print("\n❌ Missing Required Columns:")
-#             for col in missing_cols:
-#                 print(f"- {col}")
-#             raise ValueError("Missing required columns")
+        if missing_cols:
+            print("\n❌ Missing Required Columns:")
+            for col in missing_cols:
+                print(f"- {col}")
+            raise ValueError("Missing required columns")
             
-#         return df
+        return df
         
-#     except FileNotFoundError:
-#         print(f"\n❌ File not found: {file_path}")
-#         raise
-#     except Exception as e:
-#         print(f"\n❌ Error reading Excel file: {str(e)}")
-#         raise
+    except FileNotFoundError:
+        print(f"\n❌ File not found: {file_path}")
+        raise
+    except Exception as e:
+        print(f"\n❌ Error reading Excel file: {str(e)}")
+        raise
 
-# def create_payslip(pdf: FPDF, employee_data: dict) -> None:
-#     """Create a formatted payslip for an employee."""
-#     pdf.add_page()
-#     pdf.set_font("Arial", size=12)
+def create_payslip(pdf: FPDF, employee_data: dict) -> None:
+    """Create a formatted payslip for an employee."""
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
     
-#     # Header
-#     pdf.cell(200, 10, txt="Payslip", ln=True, align='C')
-#     pdf.ln(10)
+    # Header
+    pdf.cell(200, 10, txt="Payslip", ln=True, align='C')
+    pdf.ln(10)
     
-#     # Employee details
-#     pdf.cell(200, 10, txt=f"Name: {employee_data['Name']}", ln=True)
-#     pdf.cell(200, 10, txt=f"Employee ID: {employee_data['EmployeeID']}", ln=True)
-#     pdf.cell(200, 10, txt=f"Department: {employee_data['Department']}", ln=True)
-#     pdf.cell(200, 10, txt=f"Salary: ${employee_data['Salary']:.2f}", ln=True)
+    # Employee details
+    pdf.cell(200, 10, txt=f"Name: {employee_data['Name']}", ln=True)
+    pdf.cell(200, 10, txt=f"Employee ID: {employee_data['EmployeeID']}", ln=True)
+    pdf.cell(200, 10, txt=f"Department: {employee_data['Department']}", ln=True)
+    pdf.cell(200, 10, txt=f"Salary: ${employee_data['Salary']:.2f}", ln=True)
 
-# def main():
-#     # Set the path to your Excel file
-#     excel_file = r"C:\Users\uncommonStudent\OneDrive\Desktop\selwyn python\employees.xlsx"
+def main():
+    # Set the path to your Excel file
+    excel_file = r"C:\Users\uncommonStudent\OneDrive\Desktop\selwyn python\employees.xlsx"
     
-#     # Validate file existence
-#     if not validate_excel_path(excel_file):
-#         exit()
+    # Validate file existence
+    if not validate_excel_path(excel_file):
+        exit()
     
-#     try:
-#         # Load employee data with detailed debugging
-#         df = load_employee_data(excel_file)
+    try:
+        # Load employee data with detailed debugging
+        df = load_employee_data(excel_file)
         
-#         # Create output folder for payslips
-#         output_folder = os.path.join(os.path.dirname(excel_file), "payslips")
-#         os.makedirs(output_folder, exist_ok=True)
+        # Create output folder for payslips
+        output_folder = os.path.join(os.path.dirname(excel_file), "payslips")
+        os.makedirs(output_folder, exist_ok=True)
         
-#         # Generate PDF payslip for each employee
-#         success_count = 0
-#         total_employees = len(df)
+        # Generate PDF payslip for each employee
+        success_count = 0
+        total_employees = len(df)
         
-#         for _, row in df.iterrows():
-#             try:
-#                 pdf = FPDF()
-#                 create_payslip(pdf, dict(row))
+        for _, row in df.iterrows():
+            try:
+                pdf = FPDF()
+                create_payslip(pdf, dict(row))
                 
-#                 safe_name = f"{row['Name'].replace(' ', '_')}_payslip.pdf"
-#                 filename = os.path.join(output_folder, safe_name)
-#                 pdf.output(filename)
-#                 success_count += 1
+                safe_name = f"{row['Name'].replace(' ', '_')}_payslip.pdf"
+                filename = os.path.join(output_folder, safe_name)
+                pdf.output(filename)
+                success_count += 1
                 
-#             except Exception as e:
-#                 print(f"\n❌ Error generating payslip for {row['Name']}: {str(e)}")
-#                 continue
+            except Exception as e:
+                print(f"\n❌ Error generating payslip for {row['Name']}: {str(e)}")
+                continue
         
-#         print(f"\n✅ Generated {success_count}/{total_employees} payslips successfully!")
+        print(f"\n✅ Generated {success_count}/{total_employees} payslips successfully!")
         
-#     except Exception as e:
-#         print(f"\n❌ Fatal error: {str(e)}")
+    except Exception as e:
+        print(f"\n❌ Fatal error: {str(e)}")
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
 
 import pandas as pd
 from fpdf import FPDF
